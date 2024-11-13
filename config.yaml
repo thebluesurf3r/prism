@@ -1,0 +1,58 @@
+# config.yaml
+
+app:
+  title: "Prism - Data Analysis Dashboard"
+  theme: "dark"
+  layout: "wide"
+  sidebar_width: 300                    # Width of the sidebar in pixels
+  enable_refresh_button: true           # Option to include a refresh button on the dashboard
+
+data:
+  source_file: "data/salary_dataset.csv"
+  cache_duration: 300
+  date_format: "%Y-%m-%d"               # Format for date fields, useful for parsing date columns
+  column_name_case: snake               # Options: "snake" or "title"
+
+
+
+visualizations:
+  colorscale: "Viridis"
+  background_color: "black"
+  template: "plotly_dark"
+  plot_height: 500                      # Default height for plots in pixels
+  plot_width: 800                       # Default width for plots in pixels
+  display_tooltips: true                # Option to enable or disable tooltips on plots
+
+logging:
+  level: "INFO"
+  log_file: "logs/prism.log"            # Path for logs file
+  max_log_size_mb: 5                    # Max log file size in MB before rotating
+
+analysis:
+  numerical_summary_metrics: ["mean", "median", "std", "min", "max"]
+  correlation_threshold: 0.5
+  top_n_categories: 10
+  outlier_detection_method: "IQR"       # Method for detecting outliers (e.g., "IQR", "Z-score")
+  outlier_threshold: 1.5                # Threshold for outlier detection (1.5 for IQR, 3 for Z-score)
+
+cache:
+  enable_caching: true
+  cache_directory: "cache/"
+
+ui:
+  enable_download_button: true          # Enables download button for exporting results
+  allow_csv_export: true                # Allow exporting data as CSV
+  allow_excel_export: false             # Allow exporting data as Excel
+  export_directory: "exports/"          # Directory for exporting files
+  max_rows_preview: 100                 # Maximum rows to preview in the UI
+  max_cols_preview: 20                  # Maximum columns to preview in the UI
+
+error_handling:
+  show_error_messages: true             # Display detailed error messages in UI
+  default_error_message: "An error occurred. Please try again or contact support."
+  retry_on_failure: 3                   # Number of times to retry failed data loads
+
+advanced:
+  enable_advanced_analytics: true       # Option to enable advanced analytics features
+  use_gpu_for_processing: false         # Enable GPU acceleration (if supported by hardware and library)
+  parallel_processing: true             # Use parallel processing for large datasets

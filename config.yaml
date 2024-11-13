@@ -16,7 +16,7 @@ data:
 
 
 visualizations:
-  colorscale: "Viridis"
+  colorscale: "Jet"
   background_color: "black"
   template: "plotly_dark"
   plot_height: 500                      # Default height for plots in pixels

@@ -1,6 +1,7 @@
 import logging
+
 import streamlit as st
-import pandas as pd
+
 from src.extract import load_data, standardize_column_names, validate_data
 from src.feature_engineering import (
     convert_salary_to_numeric,
@@ -9,9 +10,8 @@ from src.feature_engineering import (
     add_salaries_per_reported,
     extract_job_seniority,
 )
+from src.visualizations import plot_avg_salary_by_company, plot_salary_band_distribution, plot_parallel_categories
 from utils.config import load_config
-from src.visualizations import plot_avg_salary_by_company, plot_salary_band_distribution
-import re
 
 # Initialize configurations and logging
 config = load_config()
@@ -19,7 +19,7 @@ logging.basicConfig(level=config['logging']['level'])
 
 
 def main():
-    st.title("Salary Dataset Analysis")
+    st.title("An Exploration of Data Analysis Jobs")
 
     # Remove file uploader as data is loaded from the default path
     file_path = config['data']['source_file']
@@ -85,13 +85,17 @@ def main():
     st.write(df.head())
 
     # Data Analysis and Visualization
+    st.subheader("Categorical Relationships")
+    parallel_categories_fig = plot_parallel_categories(df)
+    st.plotly_chart(parallel_categories_fig, use_container_width=True)
     st.subheader("Average Salary by Company")
     avg_salary_fig = plot_avg_salary_by_company(df)
-    st.plotly_chart(avg_salary_fig)
+    st.plotly_chart(avg_salary_fig, use_container_width=True)
 
     st.subheader("Salary Band Distribution")
     salary_band_fig = plot_salary_band_distribution(df)
-    st.plotly_chart(salary_band_fig)
+    st.plotly_chart(salary_band_fig, use_container_width=True)
+
 
 
 if __name__ == "__main__":
